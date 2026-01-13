@@ -45,8 +45,15 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton(cache);
         services.AddScoped<CryptoHandler>();
+        services.AddSingleton<Fragment.NetSlum.Networking.Services.Enterprise.EnterpriseRouter>();
+        services.AddSingleton<Fragment.NetSlum.Networking.Services.DynaLink.DynaLinkHostRegistry>();
+
+        // Compatibility adapters: register adapters first, then registry will pick them up
+        services.AddSingleton<Fragment.NetSlum.Networking.Compatibility.ICompatibilityAdapter, Fragment.NetSlum.Networking.Compatibility.SbolCompatibilityAdapter>();
+        services.AddSingleton<Fragment.NetSlum.Networking.Compatibility.CompatibilityAdapterRegistry>();
 
         services.AddPacketPipeline()
+            .AddDecoder<Fragment.NetSlum.Networking.Pipeline.Decoders.AdapterCompatibilityDecoder>()
             .AddDecoder<FragmentFrameDecoder>()
             .AddEncoder<DataTypeEnvelopeEncoder>()
             .AddEncoder<EncryptionEncoder>()

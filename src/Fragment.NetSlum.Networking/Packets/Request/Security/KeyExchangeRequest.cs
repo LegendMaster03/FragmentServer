@@ -43,12 +43,13 @@ public class KeyExchangeRequest : BaseRequest
 
         var keySize = BinaryPrimitives.ReadUInt16BigEndian(request.Data.Span[..2]);
 
-        if (keySize != 16)
+        // Accept variable key sizes commonly used in MPS (4-64 bytes)
+        if (keySize < 4 || keySize > 64)
         {
-            throw new DataException($"Invalid key length for key exchange. Expected 16 got {keySize}");
+            throw new DataException($"Invalid key length for key exchange. Expected 4..64 got {keySize}");
         }
 
-        var clientKey = request.Data[2..(keySize+2)];
+        var clientKey = request.Data[2..(keySize + 2)];
         _cryptoHandler.ClientCipher.PrepareNewKey(clientKey.ToArray());
 
         var serverCipher = BlowfishProvider.CreateNew(out var serverKey);

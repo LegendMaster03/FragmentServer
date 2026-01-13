@@ -1,0 +1,73 @@
+[
+  {
+    "name": ".hack//Fragment",
+    "mode": "PlayerServer",
+    "commonKey": "hackOnline",
+    "aliases": ["Fragment"],
+    "compatibility": ["Fragment"]
+  },
+  {
+    "name": "AI Go 2003 II + Network",
+    "mode": "Light",
+    "commonKey": null
+  },
+  {
+    "name": "AI Mahjong 2003 II + Network",
+    "mode": "Light",
+    "commonKey": null
+  },
+  {
+    "name": "AI Shogi 2003 II + Network",
+    "mode": "Light",
+    "commonKey": null
+  },
+  {
+    "name": "Chase Chase",
+    "mode": null,
+    "commonKey": null
+  },
+  {
+    "name": "Fantasy Earth Zero",
+    "mode": "Enterprise",
+    "commonKey": null
+  },
+  {
+    "name": "Fantasy Earth: The Ring of Dominion",
+    "mode": "Enterprise",
+    "commonKey": null
+  },
+  {
+    "name": "GoldRush",
+    "mode": null,
+    "commonKey": null
+  },
+  {
+    "name": "HomeLand",
+    "mode": "PlayerServer",
+    "commonKey": "abcdefgh"
+  },
+  {
+    "name": "Meteos Online",
+    "mode": null,
+    "commonKey": null,
+    "aliases": ["Meteos"]
+  },
+  {
+    "name": "Pro Baseball: Famista Online",
+    "mode": null,
+    "commonKey": null
+  },
+  {
+    "name": "Shutokou Battle Online",
+    "mode": "Enterprise",
+    "commonKey": "듖듮蕸啘읦腲縩⑷ᰧ궤꽍�毾᥍⒫댮鴟ې",
+    "aliases": ["SBOL"],
+    "compatibility": ["SBOL"]
+  },
+  {
+    "name": "Tokimeki Memorial ONLINE",
+    "mode": "Enterprise",
+    "commonKey": "yAhOoGoOgLe",
+    "aliases": ["Tokimeki"]
+  }
+]

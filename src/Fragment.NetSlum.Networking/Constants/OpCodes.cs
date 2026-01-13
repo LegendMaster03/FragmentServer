@@ -350,4 +350,12 @@ DATA_SELECT_CHAR2 seems to be a 1:1 clone of the normal OPCODE_DATA_SELECT_CHAR 
     //Unknown Packets
     DataUnknown787e = 0x787e,
     DataUnknown787fResponse = 0x787f,
+    
+    // Enterprise / MPS common opcodes (non-game-specific)
+    // Clients ask the server for available updates using 0x6810; many
+    // implementations reply with 0x6822 to indicate "no update".
+    DataEnterpriseStart = 0x6800,
+    DataUpdateCheckRequest = 0x6810,
+    DataUpdateCheckNoUpdate = 0x6822,
+    DataEnterpriseEnd = 0x68FF,
 }

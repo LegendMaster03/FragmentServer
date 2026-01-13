@@ -44,5 +44,8 @@
     "Notifications": {
         "Destinations": []
     },
+    "Crypto": {
+        "CommonKey": "hackOnline"
+    },
     "AllowedOrigins": "http://localhost:3000,https://fragment.psrewired.com,https://fragment.dothackers.org"
 }

@@ -112,7 +112,7 @@ builder.Services
 builder.Services
     .AddDbContext<FragmentContext>((provider, opt) =>
     {
-        opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        opt.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
         opt.AddInterceptors(provider.GetRequiredService<EntityChangeInterceptor>());
     })
     .AddAutoMigrations<FragmentContext>();
@@ -175,6 +175,10 @@ builder.Services.AddSingleton<ImageConverter>();
 builder.Services.AddPacketHandling();
 builder.Services.Configure<ServerConfiguration>(builder.Configuration.GetSection("TcpServer"));
 builder.Services.AddSingleton<ITcpServer, Server>();
+builder.Services.AddSingleton<Fragment.NetSlum.Server.Configuration.GameRegistry>();
+builder.Services.AddSingleton<Fragment.NetSlum.Server.Configuration.ModeFeatureService>();
+builder.Services.AddSingleton<Fragment.NetSlum.Server.Configuration.ModeGuard>();
+builder.Services.AddHostedService<Fragment.NetSlum.Server.Services.SelfTestService>();
 builder.Services.AddSingleton(typeof(ChatLobbyStore));
 builder.Services.AddHostedService<ServerBackgroundService>();
 builder.Services.AddHostedService<ClientTickService>();

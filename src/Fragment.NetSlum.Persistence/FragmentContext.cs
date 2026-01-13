@@ -24,7 +24,7 @@ public class FragmentContext : DbContext
     {
         // Use snake_cased table/column names to keep things consistent with the old database layout
         optionsBuilder
-            .UseSnakeCaseNamingConvention()
+            //.UseSnakeCaseNamingConvention()
             .UseExceptionProcessor();
 
         #if (DEBUG)

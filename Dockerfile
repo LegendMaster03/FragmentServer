@@ -1,15 +1,15 @@
-FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-noble AS base
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:10.0-noble AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-noble AS build
 WORKDIR /srv
 COPY Fragment.NetSlum.sln .
 COPY src/. src/.
 
-RUN dotnet restore src/Fragment.NetSlum.Server
+RUN --mount=type=cache,target=/root/.nuget/packages dotnet restore src/Fragment.NetSlum.Server
 
-FROM build as testrunner
+FROM build AS testrunner
 COPY test/. test/.
 RUN dotnet test -c Release --filter "Category=Unit" /p:CollectCoverage=true /p:ExcludeByFile="**/Migrations/*.cs" /p:CoverletOutput='/test/build/' /p:CoverletOutputFormat='json%2ccobertura' /p:MergeWith='/test/build/coverage.json'
 

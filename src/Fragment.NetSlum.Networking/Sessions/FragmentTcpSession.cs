@@ -158,6 +158,33 @@ public class FragmentTcpSession : TcpSession, IScopeable
         {
             ServiceScope.ServiceProvider.GetRequiredService<ChatLobbyStore>().RemoveSession(this);
 
+            // If this session was an area server, unregister it from the enterprise router
+            try
+            {
+                var router = ServiceScope.ServiceProvider.GetService<Fragment.NetSlum.Networking.Services.Enterprise.EnterpriseRouter>();
+                if (router != null && IsAreaServer)
+                {
+                    router.Unregister(this);
+                }
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogDebug(e, "Error while unregistering session from EnterpriseRouter");
+            }
+
+            try
+            {
+                var hostRegistry = ServiceScope.ServiceProvider.GetService<Fragment.NetSlum.Networking.Services.DynaLink.DynaLinkHostRegistry>();
+                if (hostRegistry != null)
+                {
+                    hostRegistry.UnregisterHost(this);
+                }
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogDebug(e, "Error while unregistering session from DynaLinkHostRegistry");
+            }
+
             _logger.LogDebug("Disposing service scope for {ClassName}", GetType().Name);
             ServiceScope.Dispose();
         }

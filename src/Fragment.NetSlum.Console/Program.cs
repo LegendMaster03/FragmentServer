@@ -25,14 +25,14 @@ services.UseEntityListener()
 services.AddDbContext<FragmentContext>((provider, opt) =>
 {
     var connString = Environment.GetEnvironmentVariable("ConnectionStrings__Database");
-    opt.UseMySql(connString, ServerVersion.AutoDetect(connString));
+    opt.UseMySql(connString, new MySqlServerVersion(new Version(8, 0, 0)));
     opt.AddInterceptors(provider.GetRequiredService<EntityChangeInterceptor>());
 });
 
 services.AddDbContext<OldFragmentContext>(opt =>
 {
     var connString = Environment.GetEnvironmentVariable("ConnectionStrings__OldDatabase");
-    opt.UseMySql(connString, ServerVersion.AutoDetect(connString));
+    opt.UseMySql(connString, new MySqlServerVersion(new Version(8, 0, 0)));
 });
 
 var registrar = new TypeRegistrar(services);
