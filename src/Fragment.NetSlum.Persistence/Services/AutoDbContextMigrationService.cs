@@ -48,7 +48,7 @@ public class AutoDbContextMigrationService<TContext> : IHostedService where TCon
 
         var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
 
-        await dbContext.Database.EnsureCreatedAsync(cancellationToken);
+        await dbContext.Database.MigrateAsync(cancellationToken);
 
         var latestExistingMigration = (await dbContext.Database.GetAppliedMigrationsAsync(cancellationToken))
             .LastOrDefault();
